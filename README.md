@@ -1,11 +1,11 @@
-# Weibo_1.0 For Flask
+# Weibo_1.0 With Flask
 Content:
 <pre>
 .
 │  config.py
 │  manage.py
 │  Weibo_1.0.py
-|
+│
 ├─app
 │  │  ioc.py
 │  │  socket.py
