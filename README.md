@@ -1,7 +1,7 @@
 # Weibo_1.0 With Flask
 Content:
 <pre>
-.
+Weibo_1.0
 │  config.py
 │  manage.py
 │  Weibo_1.0.py
