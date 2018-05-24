@@ -10,7 +10,7 @@ class Permission:
     COMMIT = 0x02
     WRITE_ARTICLES = 0x04
     MODERATE_COMMENTS =0x08
-    ADMINISTER =0x08
+     
 
 class Role(Base):
     __tablename__ = 'roles'
@@ -20,6 +20,8 @@ class Role(Base):
 
     users = relationship("User", back_populates="role")
     
+    def __repr__(self):
+        return '<Role %s>' %(self.name)
 
     @staticmethod
     def insert_roles():
@@ -32,12 +34,12 @@ class Role(Base):
                 Permission.COMMIT | \
                 Permission.WRITE_ARTICLES | \
                 MODERATE_COMMENTS,True),
-            
+
             'Administrator':(0xff,False)
         }
 
         for r in roles:
-            role = db.session.query(Role).filter(name == r).first()
+            role = Role.query.filter(name == r).first()
             if role is None:
                   role = Role(name = r)
             role.permission = roles[r][0]
