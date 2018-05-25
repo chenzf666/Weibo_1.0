@@ -1,13 +1,15 @@
 from app.models import engine
-from app.models import db_metadata
+from app.models import dbmetadata
 from app.models import db_session
+from app.models.role_model import Role 
+from app.models.user_model import User
 
 #SQL 实例化
 
 
 def init_db():
     # import models
-    db_metadata.create_all(bind=engine)
+    dbmetadata.create_all(bind=engine)
 
 
 

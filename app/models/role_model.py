@@ -1,16 +1,11 @@
 from . import Base
+from .user_model import User
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
+from sqlalchemy.orm import relationship
 from . import db_session
-
-
-class Permission:
-    FOLLOW = 0x01
-    COMMIT = 0x02
-    WRITE_ARTICLES = 0x04
-    MODERATE_COMMENTS =0x08
-     
+from .Permissions import Permission
 
 class Role(Base):
     __tablename__ = 'roles'
@@ -18,7 +13,7 @@ class Role(Base):
     name = Column(String(64),unique=True)
     permission = Column(Integer)
 
-    users = relationship("User", back_populates="role")
+    users = relationship('User',uselist=False,backref='roles')
     
     def __repr__(self):
         return '<Role %s>' %(self.name)
@@ -33,16 +28,16 @@ class Role(Base):
             'Moderator':(Permission.FOLLOW | \
                 Permission.COMMIT | \
                 Permission.WRITE_ARTICLES | \
-                MODERATE_COMMENTS,True),
+                Permission.MODERATE_COMMENTS,True),
 
             'Administrator':(0xff,False)
         }
 
         for r in roles:
-            role = Role.query.filter(name == r).first()
+            role = Role.query.filter(Role.name == 'User').first()
             if role is None:
-                  role = Role(name = r)
+                role = Role(name = r)
             role.permission = roles[r][0]
             role.default = roles[r][1]
             db_session.add(role)
-        db_session.commit(role)      
+        db_session.commit()      

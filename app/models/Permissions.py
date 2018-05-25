@@ -1,0 +1,5 @@
+class Permission:
+    FOLLOW = 0x01
+    COMMIT = 0x02
+    WRITE_ARTICLES = 0x04
+    MODERATE_COMMENTS =0x08
