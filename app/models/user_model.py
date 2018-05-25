@@ -7,7 +7,7 @@ from sqlalchemy import ForeignKey
 from .Permissions import Permission 
 from flask_login import UserMixin
 from flask_login import AnonymousUserMixin
-
+ 
 from werkzeug.security import generate_password_hash
 
 
@@ -21,6 +21,10 @@ class User(Base,UserMixin):
     #foreignkey 
     role_id = Column(Integer, ForeignKey('roles.id'))
 
+    def __repr__(self):
+        return '<User %s %s %s>' %(self.name,self.email,self.role)
+
+    #初始化 赋予默认角色
     def __init__(self,**kwargs):
         super(User,self).__init__(**kwargs)
         if self.role is None:
