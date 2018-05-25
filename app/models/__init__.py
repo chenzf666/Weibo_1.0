@@ -3,10 +3,11 @@ from sqlalchemy import MetaData
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
+from config import Config
 
 
 
-engine = create_engine('sqlite:///E:/weibo_python/database')#sql url
+engine = create_engine(Config.SQLALCHEMY_DATABASE_URI)#sql url
 db_session = scoped_session(sessionmaker(autocommit=False,autoflush=False, \
                                         bind=engine))
 

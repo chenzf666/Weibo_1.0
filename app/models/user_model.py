@@ -7,7 +7,7 @@ from sqlalchemy import ForeignKey
 from .Permissions import Permission 
 from flask_login import UserMixin
 from flask_login import AnonymousUserMixin
- 
+from .role_model import Role 
 from werkzeug.security import generate_password_hash
 
 
@@ -29,9 +29,9 @@ class User(Base,UserMixin):
         super(User,self).__init__(**kwargs)
         if self.role is None:
             if self.email == current_app.config['FLASK_ADMIN']:
-                self.role = Role.query.filter(permissions == 0xff).first()
+                self.role = Role.query.filter(Role.permissions == 0xff).first()
             if self.role is None:
-                slef.role = Role.query.filter(default = True).first()    
+                self.role = Role.query.filter(Role.default == True).first()    
 
     #权限检测
     def can(self,permissions):

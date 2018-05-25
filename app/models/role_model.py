@@ -1,8 +1,8 @@
 from . import Base
-from .user_model import User
 from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
+from sqlalchemy import Boolean
 from sqlalchemy.orm import relationship
 from . import db_session
 from .Permissions import Permission
@@ -12,8 +12,8 @@ class Role(Base):
     id = Column(Integer,primary_key=True)
     name = Column(String(64),unique=True)
     permission = Column(Integer)
-
-    users = relationship('User',uselist=False,backref='roles')
+    default = Column(Boolean,default=False)
+    users = relationship('User',backref='role')
     
     def __repr__(self):
         return '<Role %s>' %(self.name)

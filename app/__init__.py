@@ -4,6 +4,7 @@ from .models.user_model import User
 from flask_login import LoginManager
 #from .models import init_db
 from db import init_db
+from config import Config
 
 
 webapp = Flask(__name__)
@@ -12,7 +13,10 @@ login_manager = LoginManager()
 login_manager.session_protection ='Strong'
 #login_manager.login_view = ''
 login_manager.init_app(webapp)
+
+
 init_db()
+webapp.config.from_object(Config)
 
 
 
