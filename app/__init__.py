@@ -1,6 +1,7 @@
 from .models import db_session
 from flask import Flask
 from .models.user_model import User
+from .models.user_model import AnonymousUser
 from flask_login import LoginManager
 #from .models import init_db
 from db import init_db
@@ -13,6 +14,7 @@ login_manager = LoginManager()
 login_manager.session_protection ='Strong'
 #login_manager.login_view = ''
 login_manager.init_app(webapp)
+login_manager.anonymous_user = AnonymousUser
 
 
 init_db()
