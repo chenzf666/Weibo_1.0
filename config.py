@@ -4,3 +4,5 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     FLASK_ADMIN = '123456@163.com'
+
+    SECRET_KEY = 'secret_key'

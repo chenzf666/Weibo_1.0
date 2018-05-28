@@ -7,6 +7,7 @@ from sqlalchemy import String
 from sqlalchemy import Text
 from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 from .Permissions import Permission 
 from flask_login import UserMixin
 from flask_login import AnonymousUserMixin
@@ -31,6 +32,11 @@ class User(Base,UserMixin):
     #foreignkey 
     role_id = Column(Integer, ForeignKey('roles.id'))
 
+    posts = relationship('Post',backref='author',lazy = 'dynamic')
+    followed = relationship('Follow',back_populates="follower")
+    follower = relationship('Follow',back_populates="followed")
+    comments = relationship('Comment',backref='author',lazy = 'dynamic')    
+    
     def __repr__(self):
         return '<User %s %s %s>' %(self.name,self.email,self.role)
 

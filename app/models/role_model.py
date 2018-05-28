@@ -13,11 +13,13 @@ class Role(Base):
     name = Column(String(64),unique=True)
     permission = Column(Integer)
     default = Column(Boolean,default=False)
+
     users = relationship('User',backref='role')
     
     def __repr__(self):
         return '<Role %s>' %(self.name)
 
+    #放置service 层实现    
     @staticmethod
     def insert_roles():
         roles = {
