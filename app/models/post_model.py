@@ -5,10 +5,10 @@ from sqlalchemy import Text
 from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
-from sqlalchemy import relationship
+from sqlalchemy.orm import relationship
 from . import Base
 from . import db_session
-import datetime
+from datetime import datetime
 
 class Post(Base):
     __tablename__ = "posts"

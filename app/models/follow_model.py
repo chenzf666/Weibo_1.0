@@ -4,8 +4,9 @@ from sqlalchemy import String
 from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 from . import Base
-import datetime
+from datetime import datetime
 
 class Follow(Base):
     __tablename__ = "follows"

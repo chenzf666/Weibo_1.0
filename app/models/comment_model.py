@@ -8,14 +8,14 @@ from sqlalchemy import ForeignKey
 from sqlalchemy import Boolean
 from . import Base
 from . import db_session
-import datetime
+from datetime import datetime
 
 class Comment(Base):
     __tablename__ = 'comments'
     id = Column(Integer,primary_key=True)
     body = Column(Text)
     body_html = Column(Text)
-    timestamp = Column(DateTime,default=datetime.utcnow)
+    timestamp = Column(DateTime,default = datetime.utcnow)
     disabled = Column(Boolean)
 
     #foreignkey
@@ -25,8 +25,8 @@ class Comment(Base):
     def to_json(self):
         json_comment={
             "body":self.body,
-            "body_html":self.body_html
-            "timestamp":self.timestamp
+            "body_html":self.body_html,
+            "timestamp":self.timestamp,
             "disabled":self.disabled
         }
         return json_comment
