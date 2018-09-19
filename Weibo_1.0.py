@@ -9,5 +9,6 @@ def hello_world():
 
 
 if __name__ == '__main__':
+    a = 111
     print('1111111111111')
     app.run()
