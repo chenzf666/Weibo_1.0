@@ -12,8 +12,10 @@
 
 图片储存在app/static/uploads/<username>/*.图片格式
 
-第一次运行先用manage.py运行（创建数据库）
+# 1.在config.py改数据库路径账号
 
-以后就用run.py运行（已有数据库）
+# 2.运行manage.py看看有什么包要装的，自己装
 
-什么时候想删库就运行manage.py吧
+# 3.运行先用manage.py运行（创建数据库），以后就用run.py运行（已有数据库）
+
+# 4.什么时候想删库就运行manage.py吧
