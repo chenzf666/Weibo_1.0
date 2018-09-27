@@ -1,0 +1,28 @@
+#ulPic {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#ulPic li {
+    margin: 2px;
+    list-style: none;
+    display: inline;
+    float: left;
+}
+
+.imgDiv {
+    display: inline-block;
+    position: relative;
+}
+
+.imgDiv .delete {
+    position: absolute;
+    overflow: visible;
+    top: -5px;
+    right: -7px;
+    width: 15px;
+    height: 15px;
+    display: none;
+}

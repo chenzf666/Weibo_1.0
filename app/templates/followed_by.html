@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% block title %}Followed by {{ user.username }}{% endblock %}
+
+{% block page_content %}
+    <h1>{{ user.username }}关注的up主</h1>
+    {% if follows %}
+        <div class="follower">
+            {% for follower in follows %}
+                <hr>
+                <div style="height: 60px">
+                    <a href="{{ url_for('.user', username=follower.user.username) }}">
+                        <div style="float: left;width: 50px">
+                            <img class="img-rounded profile-thumbnail"
+                                 src="{{ follower.user.gravatar(size=40) }}">
+                        </div>
+                        <div style="float: left">
+                            <p>{{ follower.user.username }}</p>
+                        </div>
+                    </a>
+                    <div style="float: right">
+                        <p>{{ follower.timestamp }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <hr>
+        </div>
+        {% if pagination.pages > 1 %}
+            <div class="pagination">
+                {{ macros.pagination_widget(pagination, '.followed_by', username=user.username) }}
+            </div>
+        {% endif %}
+    {% else %}
+        <h3>佢冇关注任何人。</h3>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ pagedown.include_pagedown() }}
+{% endblock %}

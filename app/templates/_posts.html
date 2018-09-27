@@ -1,0 +1,60 @@
+{% for post in posts %}
+    <div class="post media"
+         style="margin: 0;padding: 10px;border-bottom: 1px solid #f5f5f5;border-top: 1px solid #f5f5f5">
+        <div class="media-left media-top">
+            <a href="{{ url_for('.user', username=post.author.username) }}">
+                <img class="img-rounded media-object" src="{{ post.author.gravatar(size=40) }}" alt="gravatar">
+            </a>
+        </div>
+
+        <div class="media-body">
+            <div class="post-author" style="display: inline-block">
+                <a href="{{ url_for('.user', username=post.author.username) }}">
+                    <h5 class="media-heading"><strong>{{ post.author.username }}</strong></h5>
+                </a>
+            </div>
+            <div class="post-date" style="float:right;text-align:right">
+                {{ moment(post.timestamp).fromNow() }}
+            </div>
+            <div class="post-body">
+                {% if post.body_html %}
+                    {{ post.body_html | safe }}
+                {% else %}
+                    {{ post.body }}
+                {% endif %}
+            </div>
+            <div class="post-picture">
+                <ul id="ulPic">
+                    {% for img in post.pictures.all() %}
+                        <li>
+                            <a target="_blank"
+                               href="{{ url_for('static', filename = 'uploads/{}/{}'.format(img.username, img.filename)) }}">
+                                <img src="{{ url_for('static', filename = 'uploads/{}/{}'.format(img.username, img.filename)) }}"
+                                     alt={{ img.filename }} style="height:150px">
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="post-footer" style="text-align:right">
+                {% if current_user == post.author %}
+                    <a href="{{ url_for('.edit', id=post.id) }}">
+                        <span class="label label-primary">编辑</span>
+                    </a>
+                {% elif current_user.is_administrator() %}
+                    <a href="{{ url_for('.edit', id=post.id) }}">
+                        <span class="label label-danger">编辑 [vip]</span>
+                    </a>
+                {% endif %}
+                <a href="{{ url_for('.post', id=post.id) }}">
+                    <span class="label label-default">
+                        <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
+                        博客链接</span>
+                </a>
+                <a href="{{ url_for('.post', id=post.id) }}#comments">
+                    <span class="label label-primary">{{ post.comments.count() }} 评论</span>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

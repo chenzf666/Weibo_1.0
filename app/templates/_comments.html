@@ -1,0 +1,51 @@
+{% for comment in comments %}
+    <div class="comment media"
+         style="margin: 0;padding: 10px;border-bottom: 1px solid #f5f5f5;border-top: 1px solid #f5f5f5">
+        <div class="media-left media-top">
+            <a href="{{ url_for('.user', username=comment.author.username) }}">
+                <img class="img-rounded media-object" src="{{ comment.author.gravatar(size=40) }}" alt="gravatar">
+            </a>
+        </div>
+        <div class="media-body">
+            <div class="post-author" style="display: inline-block">
+                <a href="{{ url_for('.user', username=comment.author.username) }}">
+                    <h5 class="media-heading"><strong>{{ comment.author.username }}</strong></h5>
+                </a>
+            </div>
+            <div class="comment-date" style="float:right;text-align:right">
+                {{ moment(comment.timestamp).fromNow() }}
+            </div>
+            <div class="comment-body">
+                {% if comment.disabled %}
+                    <p style="color: red"><strong><i>该评论违反了相关要求，已被禁用。</i></strong></p>
+                {% endif %}
+                {% if moderate or not comment.disabled %}
+                    {% if comment.body_html %}
+                        {{ comment.body_html | safe }}
+                    {% else %}
+                        {{ comment.body }}
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="post-footer" style="text-align:right">
+                {% if moderate %}
+                    {% if comment.disabled %}
+                        <a href="{{ url_for('.moderate_enable',id=comment.id, page=page) }}">
+                            <span class="label label-default">解禁</span>
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('.moderate_disable',id=comment.id, page=page) }}">
+                            <span class="label label-danger">禁用</span>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                <a href="">
+                    <span class="label label-primary">
+                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        喜欢</span>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
