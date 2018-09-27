@@ -1,5 +1,4 @@
-# Weibo_1.0
-Weibo For Flask 1.0
+# Weibo_1.1
 
 管理员的账号
 1660823093@qq.com
