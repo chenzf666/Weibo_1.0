@@ -18,6 +18,9 @@ from ..models.permission_model import Permission
 from ..models.post_model import Post
 from ..models.role_model import Role
 from ..models.user_model import User
+from ..models.video_model import Video
+
+print(Video.__tablename__)
 
 
 @main.route('/hello')
@@ -115,7 +118,7 @@ def edit(id):
     form = PostForm()
     if form.validate_on_submit():
         if request.form.get('imgArray') is not None:
-            img_name_init = [pic.filename for pic in post.pictures.all()]
+            img_name_init = [pic.filename for pic in post.images.all()]
             img_name = request.form.get('imgArray').split()
             img_name_remove = list(set(img_name_init).difference(set(img_name)))
             img_name_add = list(set(img_name).difference(set(img_name_init)))
@@ -276,4 +279,22 @@ def upload():
 def upload_cancel():
     path = urllib.parse.unquote(request.form.get('src'))
     os.remove('app' + path)
+    return make_response('The uploaded image has been deleted.')
+
+
+@main.route('/upload/delete', methods=['POST'])
+@login_required
+def upload_delete():
+    post_id = request.form.get('post_id')
+    images = request.form.get('imgArray').split()
+    if post_id is None:
+        images_remove = images
+        username = current_user.username
+    else:
+        post = Post.query.filter_by(id=post_id).first()
+        username = post.author.username
+        images_init = post.images
+        images_remove = list(set(images).difference(set(images_init)))
+    for filename in images_remove:
+        os.remove('{}/static/uploads/{}/{}'.format(current_app.config['STATIC_PATH'], username, filename))
     return make_response('The uploaded image has been deleted.')

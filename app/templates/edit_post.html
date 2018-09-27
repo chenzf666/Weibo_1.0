@@ -18,7 +18,7 @@
     {{ pagedown.include_pagedown() }}
     <script>
         let imgArray = $('#imgArray');
-        {% for img in post.pictures.all() %}
+        {% for img in post.images.all() %}
             var imgHTML = "<li style='padding:5px'>" +
                 "   <div class='imgDiv'>" +
                 "       <img src='" + "{{ url_for('static', filename = 'uploads/{}/{}'.format(img.username, img.filename)) }}" + "' height='150px'/>" +

@@ -1,8 +1,9 @@
-let pic = $("#picture");
-if (pic !== undefined) {
+let img = $("#image");
+if (img !== undefined) {
     (function () {
-        pic.after("<input type='hidden' id='imgArray' name='imgArray' value=''/>");
-        pic.after("<ul id='ulPic'></ul>", "<p class='hint' style='color:red;overflow:hidden;height:0;'>请放入图片!</p>");
+        img.after("<input type='hidden' id='imgArray' name='imgArray' value=''/>");
+        img.after("<input type='hidden' id='submitted' name='submitted' value='0'/>");
+        img.after("<ul id='ulPic'></ul>", "<p class='hint' style='color:red;overflow:hidden;height:0;'>请放入图片!</p>");
 
         let oUl = $("#ulPic");
         oUl.on('mouseenter', 'div', function () {
@@ -29,7 +30,7 @@ if (pic !== undefined) {
     })();
 
     //图片上传
-    pic.change(function () {
+    img.change(function () {
         if (this.files.length === 1) {
             let arr = this.files[0].name.split('.');
             if ('jpg jpe jpeg png gif svg bmp'.indexOf(arr[arr.length - 1]) !== -1) {
@@ -53,11 +54,11 @@ if (pic !== undefined) {
                         let imgArray = $('#imgArray');
                         imgArray.val(imgArray.val() + ' ' + json['filename']);
                         // 置空文件
-                        setTimeout("$('#picture').val('')", 500);
+                        setTimeout("$('#image').val('')", 500);
                     }
                 });
             } else {
-                setTimeout("$('#picture').val('')", 500);
+                setTimeout("$('#image').val('')", 500);
                 $('.hint').animate({height: '0px'}, 'slow').animate({height: '30px'}, 'slow');
                 setTimeout("$('.hint').animate({height:'0px'}, 'slow')", 2500);
             }
@@ -69,7 +70,7 @@ if (pic !== undefined) {
     // show shadow
     let shadow = $(".shadow");
     shadow.on('mouseenter', '.post,.comment', function () {
-        $(this).css('background-color', 'rgba(0, 0, 0, .1)');
+        $(this).css('background-color', 'rgba(0,0,0,.1)');
     });
     shadow.on('mouseleave', '.post,.comment', function () {
         $(this).css('background-color', 'rgba(0,0,0,0)');

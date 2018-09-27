@@ -42,7 +42,7 @@ class EditProfileAdminForm(FlaskForm):
 
 class PostForm(FlaskForm):
     body = PageDownField("有什么新鲜事想告诉大家?")
-    picture = FileField("添加图片")
+    image = FileField("添加图片")
     submit = SubmitField('确认')
 
 

@@ -71,7 +71,34 @@
             src="http://cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
     <script src="../static/utils.js"></script>
     <script>
+        // 关闭页面时清理图片 利用jinjia2语句，无法移入.js文件
+        $('.form').children('#submit').click(
+            function () {
+                $('#submitted').val('1');
+            }
+        );
 
+        $(window).on('beforeunload', function () {
+            if ($('#submitted').val() === '0') {
+                let imgArray = $('#imgArray').val();
+                {% if post %}   // 编辑博客时
+                    $.post(
+                        '/upload/delete',
+                        {
+                            'post_id': {{ post.id }},
+                            'imgArray': imgArray
+                        }
+                    );
+                {% else %}  // 新建博客时
+                    if (imgArray != null) {
+                        $.post(
+                            '/upload/delete',
+                            {'imgArray': imgArray},
+                        );
+                    }
+                {% endif %}
+            }
+        });
     </script>
 {% endblock %}
 

@@ -25,7 +25,7 @@
             </div>
             <div class="post-picture">
                 <ul id="ulPic">
-                    {% for img in post.pictures.all() %}
+                    {% for img in post.images.all() %}
                         <li>
                             <a target="_blank"
                                href="{{ url_for('static', filename = 'uploads/{}/{}'.format(img.username, img.filename)) }}">

@@ -16,7 +16,7 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    pictures = db.relationship('Image', backref='post', lazy='dynamic')
+    images = db.relationship('Image', backref='post', lazy='dynamic')
     videos = db.relationship('Video', backref='post', lazy='dynamic')
     comments = db.relationship('Comment', backref='post', lazy='dynamic')
 
