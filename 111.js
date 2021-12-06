@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         auto search falcon
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/chenzf666/Weibo_1.0/blob/master/111.js
 // @version      1.0.2
 // @description  just demo !!!
 // @author       chenzhifeng
 // @match        https://monitorvpc.inkept.cn/*
 // @icon         https://github.githubassets.com/favicons/favicon.png
+// @updateURL    https://github.com/chenzf666/Weibo_1.0/blob/master/111.js
 // @grant        none
 // ==/UserScript==
 
