@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         auto search falcon
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  just demo !!!
 // @author       chenzhifeng
 // @match        https://monitorvpc.inkept.cn/*
